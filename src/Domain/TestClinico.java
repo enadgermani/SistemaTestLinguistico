@@ -7,16 +7,8 @@ public class TestClinico extends Test {
 	private List<Domanda> domande;
 	private Valutazione diagnosi;
 
-	@Override
-	public String toString() {
-		return "TestClinico{" +
-				"domande=" + domande +
-				", diagnosi=" + diagnosi +
-				'}';
-	}
-
-	public TestClinico(String nome, Sezione sezione) {
-		super(nome,sezione);
+	public TestClinico(String nome,Sezione sezione) {
+		super(nome);
 		this.domande=new ArrayList<Domanda>();
 	}
 	

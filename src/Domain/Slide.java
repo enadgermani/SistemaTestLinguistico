@@ -2,32 +2,30 @@ package Domain;
 
 public class Slide {
 	
-	private int ordine;
-	private String domanda;
+	private Domanda domanda;
 	
-	public Slide(int ordine,String domanda) {
-		this.ordine=ordine;
-		this.domanda=domanda;
-	}
-	public Slide(String domanda) {
-		this.ordine=(int) Math.random()*10;
+	public Slide(Domanda domanda) {
 		this.domanda=domanda;
 	}
 	
 	public Slide(Slide s) {
-		this.ordine=s.ordine;
 		this.domanda=s.domanda;
 	}
 
-	public void setDomanda(String domanda) {
+	public void setDomanda(Domanda domanda) {
 		this.domanda = domanda;
 	}
-
-	public int getOrdine() {
-		return ordine;
+	
+	public Domanda getDomanda() {
+		return domanda;
 	}
-
-	public void setOrdine(int ordine) {
-		this.ordine = ordine;
+	
+	public void spostaSlide(Test newTest) {
+		Test t = getDomanda().getSezione().getTest();
+		String testo = getDomanda().getTesto();
+		Domanda d = new Domanda(newTest.getSezioni().get(0), testo);
+		newTest.getSezioni().get(0).getDomande().add(d);
+		Sezione s = getDomanda().getSezione();
+		s.getDomande().remove(d);
 	}
 }
