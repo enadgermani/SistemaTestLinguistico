@@ -6,55 +6,39 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Controller {
-    //TUTTO FINISCE QUI, TEST, Sezioni, Domande... TUTTO.
+	
     private static ArrayList<Object> objects = new ArrayList<Object>();
 
     public Controller() {
     }
 
     public String execute(String s) {
-        //DEPRECATO
         return ("command = " + s);
-
-
     }
 
 
     public static String login(String u, String p) {
-        //Funziona.
-        objects.add(Utente.create(u, p));
-
-
-
+        objects.add(Utente(u, p));
         //TODO commentare questa parte di codice prima della consegna, anche se e' molto figa
         List<String> user =
         objects.stream()
                 .map(Object::toString)
                 .filter(s-> s.contains("Utente"))
                 .collect(Collectors.toList());
-
-
-        //      .filter(s -> s.getClass().getName().contains("Utente"))
-          //      .distinct()
-         // .forEach(System.out::println);
-
-
- /*       for(Object pp: objects){
-            if(pp.getClass().getName().contains("Utente")){
-                System.out.println(pp.toString());
-            }
-        }
-
-*/
         System.out.println(user);
  return "utente" + user
          + "creato";
 
 
     }
+    
+    public Domanda creaDomanda(Sezione s, String testo) {
+    	Domanda d = new Domanda(s,testo);
+    	return d;
+    }
 
-    public String creaTest(String nome, String key) {
-        objects.add(new Test(nome, key, null));
+    public String creaTest(String nome) {
+        objects.add(new TestPilota(nome));
         return "Test " + nome + " creato";
     }
 
@@ -70,37 +54,30 @@ public class Controller {
     }
 
 
-    public void creaSlide(String ordine, String nome){
+    public void creaSlide(Domanda d){
 
         //Non capisco perchè la slide necessiti di Int ordine. Inserito dal'utente oppure random se utente spara a caso
-        Slide slide;
-        int i;
-        try {
-            i= Integer.parseInt(ordine);
-            slide =new Slide(i, nome);
-        } catch (NumberFormatException e) {
-         slide = new Slide(nome);
-
-        }
+        Slide slide = new Slide(d);
         objects.add(slide);
     }
     public static void CreaDomanda(String testo, String risposta){
 
         Slide slide = (Slide) getObject("Slide");
         Sezione sezione = (Sezione) getObject("Sezione");
-        Domanda domanda = new Domanda(slide, sezione,testo );
+        Domanda domanda = new Domanda(sezione,testo);
 
         objects.add(domanda);
         Test t = (Test) getObject("Test");
-        t.addDomanda(domanda);
+        t.getSezioni().get(0).getDomande().add(domanda);
 
     }
 
-    public void creaSezione(String nomeSezione) {
+    public Sezione creaSezione(String nomeSezione) {
      //Uso il primo test disponibile
         Test test = (Test) getObject("Test");
         Sezione sezione= new Sezione(nomeSezione, test);
         objects.add(sezione);
+        return sezione;
     }
 
 
