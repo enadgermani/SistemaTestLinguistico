@@ -1,14 +1,17 @@
 package Domain;
+
 public class ElementoGrafico {
 	
 	private double distanzaVerticale;
 	private double distanzaOrizzontale;
 	private double larghezza;
 	private double altezza;
+	private Casella casella;
 	private Slide slide;
 	
-	public ElementoGrafico(Slide slide,double altezza,double distanzaOrizzontale,double distanzaVerticale,double larghezza) {
+	public ElementoGrafico(Slide slide, Casella casella,double altezza,double distanzaOrizzontale,double distanzaVerticale,double larghezza) {
 		this.slide = slide;
+		this.casella = casella;
 		this.distanzaVerticale=distanzaVerticale;
 		this.distanzaOrizzontale=distanzaOrizzontale;
 		this.larghezza=larghezza;
@@ -16,7 +19,7 @@ public class ElementoGrafico {
 	}
 	
 	public ElementoGrafico(ElementoGrafico x) {
-		    this(x.getSlide(), x.getAltezza(),x.getDistanzaOrizzontale(),x.getDistanzaVerticale(),x.getLarghezza());
+		    this(x.getSlide(), x.getCasella(),x.getAltezza(),x.getDistanzaOrizzontale(),x.getDistanzaVerticale(),x.getLarghezza());
     }
 	
 	public void elimina(ElementoGrafico x) {
@@ -47,6 +50,14 @@ public class ElementoGrafico {
 
 	public void setDistanzaOrizzontale(double distanzaOrizzontale) {
 		this.distanzaOrizzontale = distanzaOrizzontale;
+	}
+
+	public Casella getCasella() {
+		return casella;
+	}
+
+	public void setCasella(Casella casella) {
+		this.casella = casella;
 	}
 
 	public Slide getSlide() {

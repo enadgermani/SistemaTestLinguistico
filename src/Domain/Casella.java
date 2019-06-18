@@ -1,18 +1,24 @@
 package Domain;
 
-public class CasellaTesto {
+public class Casella {
 	
 	private double altezza;
 	private double larghezza;
-	private String testo;
+	private ElementoGrafico e;
 	
-	public CasellaTesto(double altezza,double larghezza) {
+	public Casella(double altezza,double larghezza) {
 		this.altezza=altezza;
 		this.larghezza=larghezza;
 	}
 	
-	public void testo(String testo) {
-		this.testo=testo;
+	public void inserisci(ElementoGrafico x) {
+		double a = x.getAltezza();
+		double l = x.getLarghezza();
+		if (getAltezza()>a && getLarghezza()>l) {
+			e = x;
+		}else {
+			System.out.println("Errore, impossibile inserire");
+		}
 	}
 
 	public double getAltezza() {
