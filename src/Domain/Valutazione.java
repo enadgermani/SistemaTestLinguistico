@@ -11,4 +11,11 @@ public class Valutazione {
 	public void setValutazione(String v) {
 		this.diagnosi=v;
 	}
+
+	@Override
+	public String toString() {
+		return "Valutazione{" +
+				"diagnosi='" + diagnosi + '\'' +
+				'}';
+	}
 }

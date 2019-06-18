@@ -9,7 +9,14 @@ public class Utente {
 	private String username;
 	private String password;
 	private List<Permesso> permessi;
-	
+
+
+	public static  Utente create(String username, String password){
+		Utente u = new Utente (username, password);
+		return u;
+	}
+
+
 	public Utente(String username, String password,String nome, String cognome) {
 		this.username=username;
 		this.password=password;
@@ -17,10 +24,23 @@ public class Utente {
 		this.nome=nome;
 		this.permessi=new ArrayList<Permesso>();
 	}
-	
-	public boolean log(String user, String pwd) {
-		if(getUsername()==user&&getPassword()==pwd) return true;
-		else return false;
+
+	@Override
+	public String toString() {
+		return "Utente{" +
+				"nome='" + nome + '\'' +
+				", cognome='" + cognome + '\'' +
+				", username='" + username + '\'' +
+				'}';
+	}
+
+	public Utente(String username, String password){
+		this.username=username;
+		this.password=password;
+		this.cognome="StandardCognome";
+		this.nome="StandardNome";
+		this.permessi=new ArrayList<Permesso>();
+		System.out.println("utente creato");
 	}
 
 	public String getNome() {
@@ -55,13 +75,5 @@ public class Utente {
 		this.password = password;
 	}
 
-	public List<Permesso> getPermessi() {
-		return permessi;
-	}
 
-	public void setPermessi(List<Permesso> permessi) {
-		this.permessi = permessi;
-	}
-	
-	
 }
